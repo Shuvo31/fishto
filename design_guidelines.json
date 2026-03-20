@@ -1,0 +1,131 @@
+{
+  "project_name": "FISHTO - Premium Seafood Supply",
+  "design_philosophy": {
+    "theme": "The Deep Blue & The Crisp White",
+    "concept": "A visual journey from the deep ocean to the pristine plate. High contrast, wet textures, and premium whitespace.",
+    "mood": "Trustworthy, Fresh, Premium, Professional, Oceanic",
+    "target_audience": "B2B (Hotels, Catering) & B2C (Events, Households)"
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Playfair Display, serif",
+      "body": "Manrope, sans-serif",
+      "accent": "Cinzel, serif"
+    },
+    "font_install_instructions": "Import from Google Fonts: @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');",
+    "usage_rules": {
+      "headings": "Use Playfair Display for all H1-H3. Bold (700) for H1, Semibold (600) for H2. Tracking-tight.",
+      "body": "Use Manrope for all paragraphs. Leading-relaxed. Text-slate-600 for body, Text-slate-900 for bold labels.",
+      "accent": "Use Cinzel for small overlines (e.g., 'EST 2022', 'FRESH CATCH') in uppercase with tracking-widest."
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": "#0f172a",
+      "primary_foreground": "#f8fafc",
+      "secondary": "#f1f5f9",
+      "secondary_foreground": "#0f172a",
+      "accent": "#2dd4bf",
+      "accent_foreground": "#0f172a",
+      "background": "#ffffff",
+      "surface": "#f8fafc",
+      "muted": "#e2e8f0",
+      "border": "#cbd5e1",
+      "success": "#10b981",
+      "warning": "#f59e0b",
+      "destructive": "#ef4444"
+    },
+    "gradients": {
+      "ocean_depth": "linear-gradient(180deg, #0f172a 0%, #1e293b 100%)",
+      "surface_shine": "linear-gradient(120deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 100%)",
+      "aqua_glow": "linear-gradient(90deg, #2dd4bf 0%, #0ea5e9 100%)"
+    },
+    "usage": {
+      "backgrounds": "Mainly white (#ffffff) or very light slate (#f8fafc). Use Dark Ocean (#0f172a) for Footer and Hero text overlay.",
+      "text": "Never pure black. Use #1e293b for headings, #475569 for body.",
+      "cta": "Primary buttons: Dark Ocean (#0f172a). Secondary/Accent elements: Aqua (#2dd4bf)."
+    }
+  },
+  "layout_grid": {
+    "container": "max-w-7xl mx-auto px-6 sm:px-8 lg:px-12",
+    "spacing": {
+      "section_padding": "py-20 md:py-32",
+      "element_gap": "gap-8 md:gap-12"
+    },
+    "strategies": [
+      {
+        "name": "The Archipelago",
+        "description": "Islands of content (cards) floating in negative space. Avoid wall-to-wall text."
+      },
+      {
+        "name": "The Tides",
+        "description": "Asymmetrical layout for Hero and About. Image left/Text right, then swap. Use overlapping elements with z-index."
+      }
+    ]
+  },
+  "visual_enhancers": {
+    "shadows": {
+      "soft_blue": "0 10px 40px -10px rgba(14, 165, 233, 0.15)",
+      "deep_depth": "0 25px 50px -12px rgba(15, 23, 42, 0.25)"
+    },
+    "borders": {
+      "glass": "1px solid rgba(255, 255, 255, 0.5)",
+      "subtle": "1px solid #e2e8f0"
+    },
+    "textures": {
+      "water_overlay": "Use a subtle SVG noise filter or water caustic PNG overlay at 5% opacity on blue backgrounds."
+    },
+    "effects": {
+      "parallax": "CSS-based parallax. Use 'perspective' on container and 'translateZ' on children.",
+      "glassmorphism": "backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.7);"
+    }
+  },
+  "components": {
+    "Button": {
+      "style": "Pill-shaped or rounded-md. Primary: Dark Blue bg, White text, hover:scale-105 transition-transform. Accent: Aqua text, underline hover.",
+      "classes": "rounded-full font-medium tracking-wide shadow-lg hover:shadow-xl transition-all duration-300"
+    },
+    "Card": {
+      "style": "White bg, soft blue shadow. Hover: lift up (-5px).",
+      "classes": "bg-white rounded-2xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 group overflow-hidden"
+    },
+    "Navbar": {
+      "style": "Glassmorphism. Sticky top. Logo left, Links center, WhatsApp CTA right.",
+      "classes": "fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-white/20"
+    }
+  },
+  "media": {
+    "image_urls": {
+      "hero_bg": "https://images.pexels.com/photos/4628206/pexels-photo-4628206.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "about_highlight": "https://images.pexels.com/photos/3029526/pexels-photo-3029526.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "service_retail": "https://images.unsplash.com/photo-1630140198465-e49e2117356e?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "service_b2b": "https://images.unsplash.com/photo-1604909052868-dd2ef1e53daa?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "texture_water": "https://images.pexels.com/photos/4628206/pexels-photo-4628206.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    "image_rules": "All images must have 'object-cover'. Add a subtle gradient overlay (black/10 to transparent) on hero images to ensure text readability."
+  },
+  "accessibility": {
+    "rules": [
+      "Ensure 4.5:1 contrast ratio for all text.",
+      "Use semantic HTML (header, main, section, footer).",
+      "All images must have alt text.",
+      "Interactive elements must have focus states (ring-2 ring-accent)."
+    ]
+  },
+  "universal_guidelines": [
+    "Do NOT use 'Inter' for headings.",
+    "Do NOT use simple gradients; use textured or layered backgrounds.",
+    "Add data-testid to all interactive elements.",
+    "Use 'sonner' for toasts.",
+    "Use 'lucide-react' for icons.",
+    "Mobile-first responsive design is mandatory."
+  ],
+  "instructions_to_main_agent": {
+    "step_1": "Setup global CSS imports for fonts (Playfair Display, Manrope).",
+    "step_2": "Update tailwind.config.js with the new color palette and font families.",
+    "step_3": "Create the reusable UI components (Button, Card, SectionWrapper).",
+    "step_4": "Implement the specific sections in order: Hero, About, Services, Why Us, Occasions, Testimonials, FAQ, Contact, Footer.",
+    "step_5": "Ensure the WhatsApp floating button is visible on all pages (z-50).",
+    "special_note": "Implement the '3D Tilt' effect on the Services cards using CSS transform on hover."
+  }
+}
