@@ -1,95 +1,66 @@
-import { useRef, useEffect } from 'react';
-import { Shield, Truck, Award, Clock } from 'lucide-react';
+import { Check } from 'lucide-react';
+import useReveal from '@/hooks/use-reveal';
 
-const highlights = [
-  { icon: Shield, label: 'Hygienic & Fresh' },
-  { icon: Truck, label: 'Timely Delivery' },
-  { icon: Award, label: 'Premium Quality' },
-  { icon: Clock, label: 'Since 2022' },
+const ABOUT_IMAGE = 'https://images.pexels.com/photos/3029526/pexels-photo-3029526.jpeg?auto=compress&cs=tinysrgb';
+
+const promises = [
+  'Freshness you can see and taste',
+  'Hygienic handling from source to door',
+  'Insulated, ice-packed delivery',
+  'On-time, every time',
+  'The same care for 1 kg or 500 kg',
 ];
 
 export default function AboutSection() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      },
-      { threshold: 0.15 }
-    );
-    const el = sectionRef.current;
-    if (el) {
-      el.querySelectorAll('.animate-on-scroll').forEach((child) => observer.observe(child));
-    }
-    return () => observer.disconnect();
-  }, []);
+  const ref = useReveal();
 
   return (
-    <section
-      id="about"
-      data-testid="about-section"
-      ref={sectionRef}
-      className="relative py-20 md:py-32 bg-white water-texture"
-    >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image */}
-          <div className="animate-on-scroll relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(15,23,42,0.15)]">
-              <img
-                src="https://images.pexels.com/photos/3029526/pexels-photo-3029526.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                alt="Fresh salmon fillets on ice"
-                className="w-full h-[400px] md:h-[500px] object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ocean-950/30 to-transparent" />
-            </div>
-            {/* Floating badge */}
-            <div className="absolute -bottom-6 -right-4 md:right-8 glass rounded-2xl px-6 py-4 shadow-xl">
-              <p className="font-accent text-xs tracking-widest text-aqua uppercase">Trusted Since</p>
-              <p className="font-heading text-3xl font-bold text-ocean-950">2022</p>
-            </div>
+    <section id="about" data-testid="about-section" aria-labelledby="about-title" ref={ref} className="bg-canvas py-20 sm:py-28">
+      <div className="container-apple">
+        <div className="reveal mx-auto max-w-[820px] text-center">
+          <p className="eyebrow">About FISHTO</p>
+          <h2 id="about-title" className="headline mt-2">
+            Freshness isn't a feature.
+            <br />
+            <span className="text-fg-muted">It's the whole point.</span>
+          </h2>
+        </div>
+
+        <div className="mt-16 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="reveal overflow-hidden bg-canvas-alt">
+            <img
+              src={`${ABOUT_IMAGE}&w=1000`}
+              srcSet={`${ABOUT_IMAGE}&w=700 700w, ${ABOUT_IMAGE}&w=1000 1000w, ${ABOUT_IMAGE}&w=1400 1400w`}
+              sizes="(min-width: 1024px) 480px, 100vw"
+              alt="Fresh salmon fillets resting on crushed ice"
+              width="1000"
+              height="1250"
+              loading="lazy"
+              decoding="async"
+              className="aspect-[4/5] w-full object-cover"
+            />
           </div>
 
-          {/* Content */}
-          <div>
-            <div className="animate-on-scroll">
-              <span className="overline">About Us</span>
-              <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-ocean-950 tracking-tight leading-tight">
-                Your Trusted Partner in<br />
-                <span className="text-aqua-dark">Fresh Seafood Supply</span>
-              </h2>
-            </div>
+          <div className="reveal reveal-delay-1">
+            <p className="text-base text-fg sm:text-lg">
+              FISHTO started in 2022 with one clear mission: deliver the freshest, highest-quality
+              fish to every doorstep and business counter.
+            </p>
+            <p className="mt-4 text-sm text-fg-muted sm:text-base">
+              Whether you're a family ordering for tonight's dinner or a hotel that needs a
+              consistent daily supply, you get the same dedication — for regular orders and large
+              event orders alike.
+            </p>
 
-            <div className="animate-on-scroll mt-6">
-              <p className="text-base text-slate-600 font-body leading-relaxed">
-                FISHTO started in 2022 with a clear mission: to deliver the freshest,
-                highest-quality fish to every doorstep and business counter. We focus on
-                freshness, quality, hygiene, timely delivery, and reliable service.
-              </p>
-              <p className="mt-4 text-base text-slate-600 font-body leading-relaxed">
-                Whether you are a household looking for daily fresh fish or a hotel needing
-                consistent bulk supply, FISHTO is your dependable partner. We handle both
-                regular supply and large event orders with the same dedication to excellence.
-              </p>
-            </div>
-
-            {/* Highlights */}
-            <div className="animate-on-scroll mt-10 grid grid-cols-2 gap-4">
-              {highlights.map(({ icon: Icon, label }) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-3 bg-slate-50 rounded-xl px-4 py-3 border border-slate-100"
-                >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-aqua/10 flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-aqua-dark" />
-                  </div>
-                  <span className="text-sm font-body font-semibold text-ocean-950">{label}</span>
-                </div>
+            <h3 className="mt-10 text-sm font-semibold text-fg">Our promise</h3>
+            <ul className="mt-4 divide-y divide-border border-y border-border">
+              {promises.map((promise) => (
+                <li key={promise} className="flex items-center gap-3 py-s15 text-sm text-fg">
+                  <Check className="h-5 w-5 flex-shrink-0 text-brand" aria-hidden="true" />
+                  {promise}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>

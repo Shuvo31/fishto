@@ -1,132 +1,161 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useEffect, useRef, useState } from 'react';
+import { Moon, Phone, Sun } from 'lucide-react';
+import Logo from '@/components/Logo';
+import { NAV_LINKS, SITE, scrollToHash, whatsappLink } from '@/lib/site';
 
-const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Why Us', href: '#why-us' },
-  { label: 'Occasions', href: '#occasions' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#contact' },
-];
-
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+export default function Navbar({ theme, onToggleTheme }) {
+  const [open, setOpen] = useState(false);
+  const toggleRef = useRef(null);
+  const firstLinkRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    if (!open) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKey);
+    firstLinkRef.current?.focus();
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
 
-  const handleNavClick = (href) => {
-    setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const onNavigate = (e, href) => {
+    setOpen(false);
+    scrollToHash(e, href);
   };
 
   return (
-    <nav
-      data-testid="navbar"
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? 'glass shadow-[0_4px_30px_rgba(0,0,0,0.08)]'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <a
-            href="#hero"
-            data-testid="navbar-logo"
-            className="flex items-center gap-2"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          >
-            <span className="font-accent text-xl md:text-2xl font-bold tracking-wider text-ocean-950">
-              FISHTO
-            </span>
-          </a>
+    <header data-testid="navbar" className={`fixed inset-x-0 top-0 z-50 ${open ? 'bg-canvas' : 'glass-nav'}`}>
+      <nav aria-label="Primary" className="container-apple flex h-12 items-center justify-between">
+        <a
+          href="#top"
+          data-testid="navbar-logo"
+          aria-label="FISHTO home"
+          onClick={(e) => onNavigate(e, '#top')}
+          className="flex items-center"
+        >
+          <Logo className="h-[26px] w-auto" />
+        </a>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
+        <ul className="hidden items-center gap-8 lg:flex">
+          {NAV_LINKS.map((link) => (
+            <li key={link.href}>
               <a
-                key={link.href}
                 href={link.href}
                 data-testid={`nav-link-${link.label.toLowerCase().replace(/\s/g, '-')}`}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                className="text-sm font-body font-medium text-slate-600 hover:text-ocean-950 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-aqua after:transition-all after:duration-300 hover:after:w-full"
+                onClick={(e) => onNavigate(e, link.href)}
+                className="text-xs text-fg/80 transition-colors duration-slow ease-apple hover:text-fg"
               >
                 {link.label}
               </a>
-            ))}
-          </div>
+            </li>
+          ))}
+        </ul>
 
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-3">
-            <a href="tel:9748465789" data-testid="navbar-call-btn">
-              <Button variant="outline" className="rounded-full border-slate-300 text-slate-700 hover:border-ocean-950 hover:text-ocean-950 gap-2 font-body text-sm">
-                <Phone className="w-4 h-4" />
-                Call Us
-              </Button>
-            </a>
-            <a
-              href="https://wa.me/919748465789"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid="navbar-whatsapp-btn"
-            >
-              <Button className="rounded-full bg-ocean-950 hover:bg-ocean-900 text-white font-body text-sm shadow-lg hover:shadow-xl transition-all duration-300">
-                Get Quote
-              </Button>
-            </a>
-          </div>
-
-          {/* Mobile Toggle */}
+        <div className="flex items-center gap-4">
           <button
-            data-testid="mobile-menu-toggle"
-            className="lg:hidden p-2 text-ocean-950"
-            onClick={() => setMobileOpen(!mobileOpen)}
+            type="button"
+            data-testid="theme-toggle"
+            onClick={onToggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            className="relative flex h-8 w-8 items-center justify-center rounded-pill text-fg/80 transition-colors duration-slow ease-apple hover:bg-fg/10 hover:text-fg"
           >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <Sun
+              aria-hidden="true"
+              className={`absolute h-4 w-4 transition-all duration-slower ease-apple ${
+                theme === 'dark' ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-50 opacity-0'
+              }`}
+            />
+            <Moon
+              aria-hidden="true"
+              className={`absolute h-4 w-4 transition-all duration-slower ease-apple ${
+                theme === 'dark' ? 'rotate-90 scale-50 opacity-0' : 'rotate-0 scale-100 opacity-100'
+              }`}
+            />
+          </button>
+          <a
+            href={SITE.phoneHref}
+            data-testid="navbar-call-btn"
+            aria-label={`Call FISHTO at ${SITE.phoneDisplay}`}
+            className="hidden text-fg/80 transition-colors duration-slow ease-apple hover:text-fg sm:inline-flex"
+          >
+            <Phone className="h-4 w-4" aria-hidden="true" />
+          </a>
+          <a
+            href={whatsappLink('Hi FISHTO, I would like a quote for fresh fish supply')}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="navbar-whatsapp-btn"
+            className="hidden rounded-pill bg-brand px-3 py-1 text-xs text-white transition-colors duration-slow ease-apple hover:bg-brand-link sm:inline-flex"
+          >
+            Get a quote
+          </a>
+          <button
+            ref={toggleRef}
+            type="button"
+            data-testid="mobile-menu-toggle"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((v) => !v)}
+            className="relative -mr-2 h-10 w-10 lg:hidden"
+          >
+            <span
+              className={`absolute left-1/2 top-1/2 h-px w-4 -translate-x-1/2 bg-fg transition-transform duration-slow ease-apple ${
+                open ? 'rotate-45' : '-translate-y-1'
+              }`}
+            />
+            <span
+              className={`absolute left-1/2 top-1/2 h-px w-4 -translate-x-1/2 bg-fg transition-transform duration-slow ease-apple ${
+                open ? '-rotate-45' : 'translate-y-1'
+              }`}
+            />
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div data-testid="mobile-menu" className="lg:hidden glass border-t border-slate-200/50">
-          <div className="px-6 py-4 space-y-3">
-            {navLinks.map((link) => (
+      <div
+        id="mobile-menu"
+        data-testid="mobile-menu"
+        hidden={!open}
+        className="h-[calc(100dvh-48px)] overflow-y-auto bg-canvas lg:hidden"
+      >
+        <ul className="container-apple space-y-2 pb-12 pt-6">
+          {NAV_LINKS.map((link, i) => (
+            <li key={link.href} className="animate-fade-up" style={{ animationDelay: `${i * 40}ms` }}>
               <a
-                key={link.href}
+                ref={i === 0 ? firstLinkRef : undefined}
                 href={link.href}
                 data-testid={`mobile-nav-${link.label.toLowerCase().replace(/\s/g, '-')}`}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                className="block py-2 text-sm font-body font-medium text-slate-700 hover:text-ocean-950 transition-colors"
+                onClick={(e) => onNavigate(e, link.href)}
+                className="block py-1 font-display text-xl font-semibold text-fg"
               >
                 {link.label}
               </a>
-            ))}
-            <div className="pt-3 flex gap-3">
-              <a href="tel:9748465789" className="flex-1">
-                <Button variant="outline" className="w-full rounded-full font-body text-sm">
-                  <Phone className="w-4 h-4 mr-2" /> Call
-                </Button>
-              </a>
-              <a href="https://wa.me/919748465789" target="_blank" rel="noopener noreferrer" className="flex-1">
-                <Button className="w-full rounded-full bg-ocean-950 text-white font-body text-sm">
-                  Get Quote
-                </Button>
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-    </nav>
+            </li>
+          ))}
+          <li className="flex gap-3 pt-8">
+            <a href={SITE.phoneHref} className="btn-secondary flex-1">
+              <Phone className="h-4 w-4" aria-hidden="true" /> Call
+            </a>
+            <a
+              href={whatsappLink('Hi FISHTO, I would like a quote for fresh fish supply')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary flex-1"
+            >
+              Get a quote
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
   );
 }

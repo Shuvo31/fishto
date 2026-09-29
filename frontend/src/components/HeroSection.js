@@ -1,93 +1,114 @@
-import { useEffect, useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ChevronRight, Phone } from 'lucide-react';
+import { SITE, whatsappLink } from '@/lib/site';
+
+const trustStats = [
+  { value: '2022', label: 'Serving customers since' },
+  { value: '5–500 kg', label: 'Bulk orders handled' },
+  { value: 'On ice', label: 'Hygienic, insulated packing' },
+  { value: 'On time', label: 'Scheduled daily delivery' },
+];
 
 export default function HeroSection() {
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const el = heroRef.current;
-    if (el) el.classList.add('visible');
-  }, []);
-
   return (
-    <section
-      id="hero"
-      data-testid="hero-section"
-      ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-    >
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 parallax-bg"
-        style={{
-          backgroundImage: `url('https://images.pexels.com/photos/229789/pexels-photo-229789.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')`,
-        }}
-      />
-      {/* Overlay */}
-      <div className="absolute inset-0 hero-overlay" />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-        <div className="animate-fade-up" style={{ animationDelay: '0.1s' }}>
-          <span className="overline inline-block mb-6 tracking-[0.3em]">
-            EST 2022 &middot; FRESH CATCH
-          </span>
-        </div>
-
-        <h1
-          className="animate-fade-up text-4xl sm:text-5xl lg:text-7xl font-heading font-bold text-white leading-tight tracking-tight mb-6"
-          style={{ animationDelay: '0.3s' }}
-        >
-          Fresh Fish Supply for<br />
-          <span className="text-aqua">Homes, Hotels, Restaurants</span><br />
-          <span className="text-white/90">& Events</span>
-        </h1>
-
-        <p
-          className="animate-fade-up max-w-2xl mx-auto text-base md:text-lg text-slate-300 font-body leading-relaxed mb-10"
-          style={{ animationDelay: '0.5s' }}
-        >
-          Since 2022, FISHTO has been supplying fresh, high-quality fish to individual
-          customers, hotels, restaurants, catering services, and special occasions.
-        </p>
-
-        <div
-          className="animate-fade-up flex flex-col sm:flex-row gap-4 justify-center"
-          style={{ animationDelay: '0.7s' }}
-        >
-          <a href="#contact" onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}>
-            <Button
-              data-testid="hero-contact-btn"
-              className="shimmer-btn rounded-full bg-white text-ocean-950 hover:bg-slate-100 px-8 py-6 text-base font-body font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 gap-2"
-            >
-              Contact Us
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-          </a>
-          <a href="https://wa.me/919748465789?text=Hi%20FISHTO%2C%20I%20want%20a%20bulk%20order%20quote" target="_blank" rel="noopener noreferrer">
-            <Button
-              data-testid="hero-quote-btn"
-              className="rounded-full bg-aqua text-ocean-950 hover:bg-aqua-light px-8 py-6 text-base font-body font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 gap-2"
-            >
-              Get Bulk Order Quote
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-          </a>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
+    <section id="top" data-testid="hero-section" aria-labelledby="hero-title" className="pt-12">
+      <p className="bg-canvas-alt px-6 py-3 text-center text-xs text-fg">
+        Planning a wedding or reception? Book your fish supply 3–5 days ahead.{' '}
         <a
-          href="#about"
-          data-testid="hero-scroll-down"
-          onClick={(e) => { e.preventDefault(); document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' }); }}
-          className="flex flex-col items-center text-white/60 hover:text-white/90 transition-colors"
+          href={whatsappLink('Hi FISHTO, I need fish supply for an event')}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link-apple"
         >
-          <span className="text-xs font-body tracking-widest uppercase mb-2">Scroll</span>
-          <ChevronDown className="w-5 h-5" />
+          Plan now
+          <ChevronRight className="h-3 w-3" aria-hidden="true" />
         </a>
+      </p>
+
+      <div className="on-dark relative overflow-hidden bg-black">
+        <div className="container-apple relative z-10 pt-14 text-center sm:pt-16">
+          <h1 id="hero-title">
+            <span className="block animate-fade-up text-sm font-semibold sm:text-lg">
+              <span className="text-gradient-brand">FISHTO fresh fish supply</span>
+            </span>
+            <span
+              className="mt-2 block animate-fade-up font-display text-display font-semibold text-snow sm:text-display-lg lg:text-hero"
+              style={{ animationDelay: '80ms' }}
+            >
+              Fresh fish.
+              <br />
+              Delivered fresh.
+            </span>
+          </h1>
+
+          <p
+            className="mx-auto mt-4 max-w-[760px] animate-fade-up text-base text-snow/70 sm:text-lg"
+            style={{ animationDelay: '160ms' }}
+          >
+            Hygienically handled, packed on ice and delivered on time — for homes, hotels,
+            restaurants, catering and weddings.
+          </p>
+
+          <div
+            className="mt-8 flex animate-fade-up flex-col items-center justify-center gap-4 sm:flex-row"
+            style={{ animationDelay: '240ms' }}
+          >
+            <a
+              href={whatsappLink('Hi FISHTO, I would like a quote for fresh fish supply')}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="hero-quote-btn"
+              className="btn-primary min-w-[180px]"
+            >
+              Get a quote
+            </a>
+            <a href={SITE.phoneHref} data-testid="hero-contact-btn" className="btn-secondary min-w-[180px]">
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call {SITE.phoneDisplay}
+            </a>
+          </div>
+        </div>
+
+        <div className="relative mx-auto mt-10 h-[clamp(260px,56vw,660px)] max-w-[1280px]" aria-hidden="true">
+          <div className="absolute inset-x-[10%] bottom-0 top-[25%] rounded-pill bg-[radial-gradient(closest-side,rgba(0,113,227,0.45),rgba(0,113,227,0))] blur-2xl" />
+
+          <p
+            className="text-chrome absolute inset-x-0 top-0 animate-fade-up select-none text-center font-display font-semibold leading-none"
+            style={{ fontSize: 'clamp(104px, 25vw, 360px)', letterSpacing: '-0.045em', animationDelay: '300ms' }}
+          >
+            FRESH
+          </p>
+
+          <div className="absolute bottom-0 left-1/2 w-[80%] max-w-[800px] -translate-x-1/2">
+            <div className="animate-hero-rise" style={{ animationDelay: '420ms' }}>
+              <picture>
+                <source srcSet="/images/hero-fish.webp" type="image/webp" />
+                <img
+                  src="/images/hero-fish.png"
+                  alt=""
+                  width="995"
+                  height="556"
+                  fetchpriority="high"
+                  decoding="async"
+                  className="w-full animate-swim drop-shadow-[0_40px_60px_rgba(0,113,227,0.35)]"
+                />
+              </picture>
+            </div>
+          </div>
+        </div>
+
+        <div className="container-apple relative z-10">
+          <dl
+            data-testid="hero-trust"
+            className="grid grid-cols-2 gap-y-8 border-t border-snow/10 py-12 text-center sm:py-14 lg:grid-cols-4"
+          >
+            {trustStats.map((stat) => (
+              <div key={stat.label} className="flex flex-col-reverse px-4">
+                <dt className="mt-1 text-xs text-snow/60">{stat.label}</dt>
+                <dd className="font-display text-2xl font-semibold text-snow lg:text-3xl">{stat.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );

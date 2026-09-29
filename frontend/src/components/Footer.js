@@ -1,98 +1,92 @@
-import { Mail, Phone, ArrowUp } from 'lucide-react';
+import Logo from '@/components/Logo';
+import { NAV_LINKS, SITE, scrollToHash, whatsappLink } from '@/lib/site';
 
-const footerLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Why Us', href: '#why-us' },
-  { label: 'Occasions', href: '#occasions' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#contact' },
+const serviceLinks = [
+  'Household supply',
+  'Hotel bulk supply',
+  'Restaurant supply',
+  'Catering supply',
+  'Event & occasion supply',
+  'Custom bulk orders',
 ];
 
 export default function Footer() {
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  const handleClick = (e, href) => {
-    e.preventDefault();
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  const linkClass = 'text-fg-muted transition-colors duration-slow ease-apple hover:text-fg hover:underline';
 
   return (
-    <footer data-testid="footer-section" className="relative bg-ocean-950 text-white">
-      {/* Wave top */}
-      <div className="absolute -top-px left-0 w-full overflow-hidden leading-none">
-        <svg viewBox="0 0 1440 60" className="w-full h-[40px] md:h-[60px]" preserveAspectRatio="none">
-          <path fill="#f8fafc" d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,35 1440,30 L1440,0 L0,0 Z" />
-        </svg>
-      </div>
+    <footer data-testid="footer-section" className="bg-canvas-alt text-xs">
+      <div className="container-apple py-12">
+        <div className="border-b border-fg/15 pb-8">
+          <Logo className="h-7 w-auto" />
+          <p className="mt-3 max-w-[520px] text-fg-muted">
+            FISHTO is a fresh fish supplier for homes, hotels, restaurants, caterers and events.
+            Hygienically handled, packed on ice and delivered on time since {SITE.foundedYear}.
+          </p>
+        </div>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-20 pb-8">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
-          {/* Brand */}
-          <div>
-            <h3 className="font-accent text-2xl font-bold tracking-wider mb-3">FISHTO</h3>
-            <p className="text-sm font-body text-slate-400 leading-relaxed">
-              Fresh Fish Supply Since 2022. Delivering premium quality fish to homes, hotels, restaurants, and events across the region.
-            </p>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-heading font-semibold text-base mb-4 text-white">Quick Links</h4>
-            <ul className="space-y-2">
-              {footerLinks.map((link) => (
+        <div className="grid grid-cols-2 gap-8 py-8 sm:grid-cols-3">
+          <nav aria-label="Footer">
+            <h2 className="font-text text-xs font-semibold text-fg">Explore</h2>
+            <ul className="mt-3 space-y-2">
+              {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    onClick={(e) => handleClick(e, link.href)}
+                    onClick={(e) => scrollToHash(e, link.href)}
                     data-testid={`footer-link-${link.label.toLowerCase().replace(/\s/g, '-')}`}
-                    className="text-sm font-body text-slate-400 hover:text-aqua transition-colors duration-200"
+                    className={linkClass}
                   >
                     {link.label}
                   </a>
                 </li>
               ))}
             </ul>
+          </nav>
+
+          <div>
+            <h2 className="font-text text-xs font-semibold text-fg">Services</h2>
+            <ul className="mt-3 space-y-2">
+              {serviceLinks.map((service) => (
+                <li key={service}>
+                  <a
+                    href={whatsappLink(`Hi FISHTO, I would like a quote for ${service.toLowerCase()}`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={linkClass}
+                  >
+                    {service}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="font-heading font-semibold text-base mb-4 text-white">Contact</h4>
-            <div className="space-y-3">
-              <a
-                href="mailto:support@fishto.in"
-                data-testid="footer-email"
-                className="flex items-center gap-3 text-sm font-body text-slate-400 hover:text-aqua transition-colors"
-              >
-                <Mail className="w-4 h-4 flex-shrink-0" />
-                support@fishto.in
+            <h2 className="font-text text-xs font-semibold text-fg">Contact</h2>
+            <address className="mt-3 space-y-2 not-italic">
+              <a href={SITE.phoneHref} data-testid="footer-phone" className={`block ${linkClass}`}>
+                {SITE.phoneDisplay}
               </a>
-              <a
-                href="tel:9748465789"
-                data-testid="footer-phone"
-                className="flex items-center gap-3 text-sm font-body text-slate-400 hover:text-aqua transition-colors"
-              >
-                <Phone className="w-4 h-4 flex-shrink-0" />
-                9748465789
+              <a href={`mailto:${SITE.email}`} data-testid="footer-email" className={`block ${linkClass}`}>
+                {SITE.email}
               </a>
-            </div>
+              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className={`block ${linkClass}`}>
+                WhatsApp
+              </a>
+            </address>
           </div>
         </div>
 
-        {/* Divider & Bottom */}
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs font-body text-slate-500">
-            &copy; {new Date().getFullYear()} FISHTO. All rights reserved. Fresh Fish Supply Since 2022.
-          </p>
-          <button
+        <div className="flex flex-col gap-2 border-t border-fg/15 pt-6 text-fg-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>Copyright © {new Date().getFullYear()} FISHTO. All rights reserved.</p>
+          <a
+            href="#top"
             data-testid="footer-scroll-top"
-            onClick={scrollToTop}
-            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors duration-200"
+            onClick={(e) => scrollToHash(e, '#top')}
+            className={linkClass}
           >
-            <ArrowUp className="w-4 h-4" />
-          </button>
+            Back to top
+          </a>
         </div>
       </div>
     </footer>

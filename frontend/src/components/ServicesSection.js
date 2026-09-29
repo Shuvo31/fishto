@@ -1,119 +1,117 @@
-import { useRef, useEffect } from 'react';
-import { Home, Building2, UtensilsCrossed, ChefHat, PartyPopper, Package } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
+import useReveal from '@/hooks/use-reveal';
+import { whatsappLink } from '@/lib/site';
 
 const services = [
   {
-    icon: Home,
-    title: 'Household Supply',
-    description: 'Fresh fish delivered straight to your home. Daily, weekly, or on-demand supply for families.',
-    image: 'https://images.unsplash.com/photo-1764345960391-9b66a2541deb?crop=entropy&cs=srgb&fm=jpg&q=85&w=400',
+    title: 'Household supply',
+    tagline: 'Fresh fish at your door. Daily, weekly or on demand.',
+    image: 'https://images.unsplash.com/photo-1764345960391-9b66a2541deb?crop=entropy&cs=srgb&fm=jpg&q=80',
+    alt: 'Fresh fish prepared for a family meal',
+    tone: 'light',
   },
   {
-    icon: Building2,
-    title: 'Hotel Bulk Supply',
-    description: 'Consistent, high-volume fresh fish supply for hotels. Reliable deliveries to meet your daily menu needs.',
-    image: 'https://images.unsplash.com/photo-1772654271379-484eeabecc37?crop=entropy&cs=srgb&fm=jpg&q=85&w=400',
+    title: 'Hotel bulk supply',
+    tagline: 'High-volume, consistent supply for daily menus.',
+    image: 'https://images.unsplash.com/photo-1772654271379-484eeabecc37?crop=entropy&cs=srgb&fm=jpg&q=80',
+    alt: 'Bulk crates of fresh fish ready for hotel kitchens',
+    tone: 'dark',
   },
   {
-    icon: UtensilsCrossed,
-    title: 'Restaurant Supply',
-    description: 'Premium-grade fish for restaurants. From local favorites to exotic varieties, always fresh.',
-    image: 'https://images.pexels.com/photos/3029526/pexels-photo-3029526.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=400&w=400',
+    title: 'Restaurant supply',
+    tagline: 'Premium-grade local favourites and exotic varieties.',
+    image: 'https://images.pexels.com/photos/3029526/pexels-photo-3029526.jpeg?auto=compress&cs=tinysrgb',
+    alt: 'Premium fish fillets on ice for restaurants',
+    tone: 'dark',
   },
   {
-    icon: ChefHat,
-    title: 'Catering Service Supply',
-    description: 'Large-scale fish supply for catering businesses. Timely delivery guaranteed for your events.',
-    image: 'https://images.pexels.com/photos/229789/pexels-photo-229789.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=400&w=400',
+    title: 'Catering supply',
+    tagline: 'Large-scale orders, delivered on time for every event.',
+    image: 'https://images.pexels.com/photos/229789/pexels-photo-229789.jpeg?auto=compress&cs=tinysrgb',
+    alt: 'Whole fish on ice for catering orders',
+    tone: 'light',
   },
   {
-    icon: PartyPopper,
-    title: 'Event & Occasion Supply',
-    description: 'Special fish supply for marriages, receptions, birthdays, and all celebrations.',
-    image: 'https://images.unsplash.com/photo-1769611446060-e97e80d23063?crop=entropy&cs=srgb&fm=jpg&q=85&w=400',
+    title: 'Event & occasion supply',
+    tagline: 'Marriages, receptions, birthdays and every celebration.',
+    image: 'https://images.unsplash.com/photo-1769611446060-e97e80d23063?crop=entropy&cs=srgb&fm=jpg&q=80',
+    alt: 'Fish dishes served at a celebration',
+    tone: 'light',
   },
   {
-    icon: Package,
-    title: 'Custom Bulk Orders',
-    description: 'Tailored bulk fish orders for marriage, reception, birthday, functions and more. Custom quantities available.',
-    image: 'https://images.unsplash.com/photo-1767347898281-e4a21328e615?crop=entropy&cs=srgb&fm=jpg&q=85&w=400',
+    title: 'Custom bulk orders',
+    tagline: 'Your quantity, your varieties. Tailored to the kilo.',
+    image: 'https://images.unsplash.com/photo-1767347898281-e4a21328e615?crop=entropy&cs=srgb&fm=jpg&q=80',
+    alt: 'Assorted fresh fish packed for a custom bulk order',
+    tone: 'dark',
   },
 ];
 
-export default function ServicesSection() {
-  const sectionRef = useRef(null);
+const withWidth = (url, w) => `${url}&w=${w}`;
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      },
-      { threshold: 0.1 }
-    );
-    const el = sectionRef.current;
-    if (el) {
-      el.querySelectorAll('.animate-on-scroll, .stagger-children').forEach((child) =>
-        observer.observe(child)
-      );
-    }
-    return () => observer.disconnect();
-  }, []);
+function ServiceTile({ service }) {
+  const dark = service.tone === 'dark';
+  return (
+    <article
+      data-testid={`service-card-${service.title.toLowerCase().replace(/[^a-z]+/g, '-')}`}
+      className={`tile reveal flex flex-col overflow-hidden text-center ${
+        dark ? 'on-dark bg-ink' : 'bg-canvas-alt'
+      }`}
+    >
+      <div className="px-6 pt-12 sm:pt-14">
+        <h3 className={`text-2xl font-semibold sm:text-3xl ${dark ? 'text-snow' : 'text-fg'}`}>
+          {service.title}
+        </h3>
+        <p className={`mx-auto mt-2 max-w-[460px] text-sm sm:text-base ${dark ? 'text-snow/70' : 'text-fg-muted'}`}>
+          {service.tagline}
+        </p>
+        <a
+          href={whatsappLink(`Hi FISHTO, I would like a quote for ${service.title.toLowerCase()}`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link-apple mt-4 text-sm"
+          aria-label={`Get a quote for ${service.title.toLowerCase()} on WhatsApp`}
+        >
+          Get a quote
+          <ChevronRight className="h-4 w-4" aria-hidden="true" />
+        </a>
+      </div>
+      <div className="tile-media mt-8 aspect-[4/3] flex-grow overflow-hidden">
+        <img
+          src={withWidth(service.image, 900)}
+          srcSet={`${withWidth(service.image, 600)} 600w, ${withWidth(service.image, 900)} 900w, ${withWidth(service.image, 1400)} 1400w`}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          alt={service.alt}
+          width="900"
+          height="675"
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover"
+        />
+      </div>
+    </article>
+  );
+}
+
+export default function ServicesSection() {
+  const ref = useReveal();
 
   return (
-    <section
-      id="services"
-      data-testid="services-section"
-      ref={sectionRef}
-      className="relative py-20 md:py-32 bg-slate-50"
-    >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Header */}
-        <div className="animate-on-scroll text-center mb-16">
-          <span className="overline">What We Offer</span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-ocean-950 tracking-tight">
-            Our Services
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-base md:text-lg text-slate-600 font-body leading-relaxed">
-            From daily household needs to large-scale event supply, we cover every aspect of fresh fish delivery.
-          </p>
-        </div>
+    <section id="services" data-testid="services-section" aria-labelledby="services-title" ref={ref} className="bg-canvas pb-3">
+      <div className="container-apple reveal py-16 text-center sm:py-20">
+        <p className="eyebrow">Services</p>
+        <h2 id="services-title" className="headline mt-2">
+          Every table, covered.
+        </h2>
+        <p className="subhead mx-auto mt-4 max-w-[640px]">
+          From a family dinner to a 500-guest wedding, one supplier for every kind of order.
+        </p>
+      </div>
 
-        {/* Services Grid */}
-        <div className="stagger-children grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              data-testid={`service-card-${service.title.toLowerCase().replace(/\s+/g, '-')}`}
-              className="card-3d group"
-            >
-              <div className="card-3d-inner bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300">
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ocean-950/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4 w-12 h-12 rounded-xl bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                    <service.icon className="w-6 h-6 text-ocean-950" />
-                  </div>
-                </div>
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-lg font-heading font-semibold text-ocean-950 mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm font-body text-slate-600 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="container-wide grid gap-3 md:grid-cols-2">
+        {services.map((service) => (
+          <ServiceTile key={service.title} service={service} />
+        ))}
       </div>
     </section>
   );

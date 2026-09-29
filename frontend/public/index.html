@@ -1,31 +1,118 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="FISHTO - Fresh Fish Supply for homes, hotels, restaurants, catering, and events." />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
-        <!--
-        manifest.json provides metadata used when your web app is installed on a
-        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-        -->
-        <!--
-        Notice the use of %PUBLIC_URL% in the tags above.
-        It will be replaced with the URL of the `public` folder during the build.
-        Only files inside the `public` folder can be referenced from the HTML.
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>FISHTO | Fresh Fish Supply for Homes, Hotels, Restaurants &amp; Events</title>
+        <meta name="description" content="FISHTO delivers fresh, hygienically handled fish to homes, hotels, restaurants, caterers and weddings. Bulk orders from 5 kg to 500 kg. Trusted since 2022 — get a quote on WhatsApp." />
+        <meta name="keywords" content="fresh fish supply, fish delivery, bulk fish supplier, fish supplier for hotels, fish supplier for restaurants, catering fish supply, wedding fish order, Rohu, Katla, Hilsa, Pomfret, prawns, FISHTO" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <meta name="author" content="FISHTO" />
+        <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+        <meta name="color-scheme" content="light dark" />
+        <script>
+            (function () {
+                try {
+                    var stored = localStorage.getItem("fishto-theme");
+                    var dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+                    if (dark) document.documentElement.classList.add("dark");
+                } catch (e) {}
+            })();
+        </script>
+        <meta name="format-detection" content="telephone=yes" />
+        <link rel="canonical" href="https://fishto.in/" />
 
-        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-        work correctly both with client-side routing and a non-root public URL.
-        Learn how to configure a non-root public URL by running `npm run build`.
-        -->
-        <title>FISHTO | Fresh Fish Supply</title>
+        <link rel="icon" href="%PUBLIC_URL%/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="%PUBLIC_URL%/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="FISHTO" />
+        <meta property="og:locale" content="en_IN" />
+        <meta property="og:url" content="https://fishto.in/" />
+        <meta property="og:title" content="FISHTO | Fresh fish. Delivered fresh." />
+        <meta property="og:description" content="Fresh fish supply for homes, hotels, restaurants, catering and weddings. Bulk orders from 5 kg to 500 kg. Trusted since 2022." />
+        <meta property="og:image" content="https://fishto.in/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="FISHTO logo with the headline: Fresh fish. Delivered fresh." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="FISHTO | Fresh fish. Delivered fresh." />
+        <meta name="twitter:description" content="Fresh fish supply for homes, hotels, restaurants, catering and weddings. Trusted since 2022." />
+        <meta name="twitter:image" content="https://fishto.in/og-image.png" />
+        <meta name="twitter:image:alt" content="FISHTO logo with the headline: Fresh fish. Delivered fresh." />
+
+        <link rel="preconnect" href="https://images.pexels.com" crossorigin />
+        <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+        <link rel="preload" as="image" href="%PUBLIC_URL%/images/hero-fish.webp" type="image/webp" fetchpriority="high" />
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": ["LocalBusiness", "Organization"],
+                    "@id": "https://fishto.in/#business",
+                    "name": "FISHTO",
+                    "alternateName": "Fishto Fresh Fish Supply",
+                    "description": "Fresh fish supplier for homes, hotels, restaurants, caterers and events. Bulk orders from 5 kg to 500 kg.",
+                    "url": "https://fishto.in/",
+                    "logo": "https://fishto.in/icon-512.png",
+                    "image": "https://fishto.in/og-image.png",
+                    "telephone": "+91-9748465789",
+                    "email": "support@fishto.in",
+                    "foundingDate": "2022",
+                    "areaServed": { "@type": "Country", "name": "India" },
+                    "paymentAccepted": "Cash, UPI, Bank transfer",
+                    "currenciesAccepted": "INR",
+                    "contactPoint": {
+                        "@type": "ContactPoint",
+                        "telephone": "+91-9748465789",
+                        "contactType": "sales"
+                    },
+                    "makesOffer": [
+                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Household fish supply" } },
+                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Hotel bulk fish supply" } },
+                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Restaurant fish supply" } },
+                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Catering fish supply" } },
+                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Event and wedding fish supply" } },
+                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom bulk fish orders" } }
+                    ]
+                },
+                {
+                    "@type": "WebSite",
+                    "@id": "https://fishto.in/#website",
+                    "url": "https://fishto.in/",
+                    "name": "FISHTO",
+                    "inLanguage": "en-IN",
+                    "publisher": { "@id": "https://fishto.in/#business" }
+                },
+                {
+                    "@type": "FAQPage",
+                    "@id": "https://fishto.in/#faq",
+                    "mainEntity": [
+                        { "@type": "Question", "name": "What types of fish does FISHTO supply?", "acceptedAnswer": { "@type": "Answer", "text": "We supply a wide variety of fresh fish including Rohu, Katla, Hilsa, Pomfret, Prawns and many more. Our selection varies with seasonal availability to ensure maximum freshness." } },
+                        { "@type": "Question", "name": "What is the minimum order quantity for bulk orders?", "acceptedAnswer": { "@type": "Answer", "text": "Bulk orders start at 5 kg. For event orders, we customise quantities to your requirements. Contact us for a custom quote." } },
+                        { "@type": "Question", "name": "How do you keep the fish fresh during delivery?", "acceptedAnswer": { "@type": "Answer", "text": "We use insulated packaging with ice to maintain the right temperature in transit, and our delivery network is designed for quick turnaround so fish reaches you in the freshest condition." } },
+                        { "@type": "Question", "name": "Do you deliver to my area?", "acceptedAnswer": { "@type": "Answer", "text": "We serve major areas in and around our operating region. To confirm delivery to your location, message us on WhatsApp or give us a call." } },
+                        { "@type": "Question", "name": "How far in advance should I order for events?", "acceptedAnswer": { "@type": "Answer", "text": "For large events like weddings or receptions, we recommend ordering at least 3–5 days in advance so we can source the best quality fish and guarantee on-time delivery." } },
+                        { "@type": "Question", "name": "What payment methods do you accept?", "acceptedAnswer": { "@type": "Answer", "text": "We accept cash on delivery, UPI and bank transfers. For bulk and corporate orders, credit terms are available on a case-by-case basis." } },
+                        { "@type": "Question", "name": "Can I order a specific type of fish?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We accommodate custom orders based on availability. Share your requirements and we will do our best to source the fish you need." } }
+                    ]
+                }
+            ]
+        }
+        </script>
         <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
     </head>
     <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <noscript>
+            <h1>FISHTO — Fresh fish supply for homes, hotels, restaurants &amp; events</h1>
+            <p>FISHTO delivers fresh, hygienically handled fish to homes, hotels, restaurants, caterers and weddings since 2022. Bulk orders from 5 kg to 500 kg.</p>
+            <p>Call <a href="tel:+919748465789">+91 97484 65789</a>, email <a href="mailto:support@fishto.in">support@fishto.in</a> or <a href="https://wa.me/919748465789">chat on WhatsApp</a>.</p>
+        </noscript>
         <div id="root"></div>
         <!--
       This HTML file is a template.

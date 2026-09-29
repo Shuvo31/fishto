@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>FISHTO logo system</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1600px; font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; background: #FFFFFF; color: #1D1D1F; -webkit-font-smoothing: antialiased; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 16px; }
+  .cell { height: 440px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+  .cell.wide { grid-column: span 2; height: 520px; }
+  .label { position: absolute; left: 32px; top: 28px; font-size: 15px; font-weight: 600; color: #6E6E73; }
+  .dark .label { color: rgba(245,245,247,0.6); }
+  .light { background: #F5F5F7; }
+  .dark { background: #1D1D1F; }
+  .blue { background: linear-gradient(135deg, #2997FF, #0066CC); }
+  .icons { display: flex; align-items: flex-end; gap: 48px; }
+  .icons img { display: block; }
+  .phone { width: 300px; height: 380px; border-radius: 48px; background: linear-gradient(160deg, #1D1D1F, #0066CC); padding: 36px 30px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 14px; align-content: start; }
+  .app { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11px; color: #F5F5F7; }
+  .app i { display: block; width: 52px; height: 52px; border-radius: 12px; background: rgba(245,245,247,0.18); }
+  .app img { width: 52px; height: 52px; }
+  .lockup { display: flex; align-items: center; gap: 20px; }
+  .tab { display: flex; align-items: center; gap: 10px; background: #FFFFFF; border-radius: 12px 12px 0 0; padding: 12px 18px; width: 300px; font-size: 14px; box-shadow: 0 0 0 1px rgba(29,29,31,0.1); }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="cell wide">
+      <span class="label">Primary wordmark</span>
+      <img src="../frontend/public/logo.svg" style="height: 200px" alt="" />
+    </div>
+    <div class="cell dark">
+      <span class="label">On dark</span>
+      <img src="../frontend/public/logo-white.svg" style="height: 120px" alt="" />
+    </div>
+    <div class="cell light">
+      <span class="label">App icon</span>
+      <div class="icons">
+        <img src="../frontend/public/logo-mark.svg" style="width: 200px" alt="" />
+        <img src="../frontend/public/logo-mark.svg" style="width: 96px" alt="" />
+        <img src="../frontend/public/logo-mark.svg" style="width: 48px" alt="" />
+        <img src="../frontend/public/logo-mark.svg" style="width: 24px" alt="" />
+      </div>
+    </div>
+    <div class="cell light">
+      <span class="label">On a home screen</span>
+      <div class="phone">
+        <div class="app"><i></i>Photos</div><div class="app"><i></i>Maps</div><div class="app"><img src="../frontend/public/logo-mark.svg" alt="" />FISHTO</div><div class="app"><i></i>Music</div>
+        <div class="app"><i></i>Notes</div><div class="app"><i></i>Mail</div><div class="app"><i></i>Wallet</div><div class="app"><i></i>Clock</div>
+        <div class="app"><i></i>Camera</div><div class="app"><i></i>Files</div><div class="app"><i></i>News</div><div class="app"><i></i>Health</div>
+      </div>
+    </div>
+    <div class="cell blue">
+      <span class="label" style="color: rgba(255,255,255,0.75)">Lockup and browser tab</span>
+      <div class="lockup">
+        <img src="../frontend/public/logo-mark.svg" style="width: 120px; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.25))" alt="" />
+      </div>
+      <div class="tab" style="margin-top: 48px"><img src="../frontend/public/favicon.svg" style="width: 18px" alt="" />FISHTO | Fresh Fish Supply</div>
+    </div>
+  </div>
+</body>
+</html>
