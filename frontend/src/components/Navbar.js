@@ -36,7 +36,7 @@ export default function Navbar({ theme, onToggleTheme }) {
         <a
           href="#top"
           data-testid="navbar-logo"
-          aria-label="FISHTO home"
+          aria-label="Fishto home"
           onClick={(e) => onNavigate(e, '#top')}
           className="flex items-center"
         >

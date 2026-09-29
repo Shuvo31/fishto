@@ -1,7 +1,7 @@
-"""Generates the FISHTO logo system (wordmark, app icon, favicon) as pure-path SVGs.
+"""Generates the Fishto logo system (wordmark, app icon, favicon) as pure-path SVGs.
 
 Wordmark letters come from Outfit ExtraBold (SIL OFL, see fonts/OFL.txt); the final
-"o" is drawn as a fish so the brand reads "fisht" + fish.
+"o" is drawn as a ring with a forked tail, so it reads as both the letter and a fish.
 
 Run: python build_logo.py   (requires fonttools)
 """
@@ -46,10 +46,10 @@ def glyph_bounds(ch):
 ix0, _, ix1, _ = glyph_bounds("i")
 STEM = ix1 - ix0
 
-# ---- Letters "fisht" (y flipped so baseline sits at y=0, ascenders negative) ----
+# ---- Letters "Fisht" (y flipped so baseline sits at y=0, ascenders negative) ----
 letters = []
 x = 0
-for ch in "fisht":
+for ch in "Fisht":
     name = cmap[ord(ch)]
     pen = SVGPathPen(glyphs)
     glyphs[name].draw(TransformPen(pen, (1, 0, 0, -1, x, 0)))
@@ -101,12 +101,54 @@ def fish(x0, cy, H):
     return body + eye + gill, tx + tl * 0.02
 
 
+def circle(cx, cy, r, ccw=False):
+    sweep = 0 if ccw else 1
+    return (
+        f"M{cx - r:.1f} {cy:.1f}A{r:.1f} {r:.1f} 0 1 {sweep} {cx + r:.1f} {cy:.1f}"
+        f"A{r:.1f} {r:.1f} 0 1 {sweep} {cx - r:.1f} {cy:.1f}Z"
+    )
+
+
+def fish_o(x0, cy, H):
+    """The "o" of Fishto: a letter-weight ring with a forked tail and an eye.
+
+    The counter keeps the word readable; the tail and eye make it a fish.
+    """
+    R = H / 2
+    r = R - STEM * 0.86     # counter stays open so the "o" survives at favicon size
+    cx = x0 + R
+    tl = H * 0.60           # tail length
+    fin = H * 0.42          # half-height of the tail tips
+    jy = H * 0.10           # half-height of the joint where the tail meets the ring
+    jx = cx + math.sqrt(max(R * R - jy * jy, 1))
+    tx = cx + R + tl
+    eye_a = math.radians(152)   # up and to the left, where the head reads
+    eye_d = r + (R - r) * 0.55  # centred in the ring so neither edge closes up
+
+    def p(a, b):
+        return f"{a:.1f} {b:.1f}"
+
+    tail = (
+        f"M{p(jx, cy - jy)}"
+        f"L{p(tx - tl * 0.10, cy - fin)}"
+        f"Q{p(tx + tl * 0.02, cy - fin * 1.02)} {p(tx - tl * 0.06, cy - fin * 0.80)}"
+        f"Q{p(tx - tl * 0.45, cy)} {p(tx - tl * 0.06, cy + fin * 0.80)}"
+        f"Q{p(tx + tl * 0.02, cy + fin * 1.02)} {p(tx - tl * 0.10, cy + fin)}"
+        f"L{p(jx, cy + jy)}"
+        f"A{R:.1f} {R:.1f} 0 0 1 {p(jx, cy - jy)}Z"
+    )
+    eye = circle(
+        cx + eye_d * math.cos(eye_a), cy - eye_d * math.sin(eye_a), H * 0.078, ccw=True
+    )
+    return circle(cx, cy, R) + circle(cx, cy, r, ccw=True) + tail + eye, tx + tl * 0.02
+
+
 o_left_bearing = glyph_bounds("o")[0]
 FISH_H = x_height + 24                        # optical overshoot above/below the x-height
-fish_path, tail_end = fish(x + o_left_bearing + 28, -x_height / 2, FISH_H)
+fish_path, tail_end = fish_o(x + o_left_bearing + 10, -x_height / 2, FISH_H)
 
 # ---- Wordmark viewBox ----
-f_top = -max(glyph_bounds("f")[3], glyph_bounds("h")[3])
+f_top = -max(glyph_bounds("F")[3], glyph_bounds("h")[3])
 pad = 20
 vb_x, vb_y = -pad, f_top - pad
 vb_w = tail_end + 2 * pad
@@ -115,7 +157,7 @@ vb_h = -f_top + 2 * pad + 12
 
 def wordmark_svg(letter_fill, fish_fill, defs=""):
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb_x:.0f} {vb_y:.0f} {vb_w:.0f} {vb_h:.0f}" role="img" aria-labelledby="t">
-  <title id="t">FISHTO</title>
+  <title id="t">Fishto</title>
   {defs}<path fill="{letter_fill}" d="{letters_path}"/>
   <path fill="{fish_fill}" fill-rule="evenodd" d="{fish_path}"/>
 </svg>
@@ -155,7 +197,7 @@ SQUIRCLE = squircle(ICON)
 
 def icon_svg(background):
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {ICON} {ICON}" role="img" aria-labelledby="t">
-  <title id="t">FISHTO</title>
+  <title id="t">Fishto</title>
   <defs><linearGradient id="fishto-icon" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{BLUE_TOP}"/><stop offset="1" stop-color="{BLUE_BOTTOM}"/></linearGradient></defs>
   <path fill="url(#fishto-icon)" d="{background}"/>
   <path fill="#FFFFFF" fill-rule="evenodd" transform="{ICON_TRANSFORM}" d="{icon_fish_path}"/>

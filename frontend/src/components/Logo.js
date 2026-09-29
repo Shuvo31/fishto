@@ -33,7 +33,7 @@ export default function Logo({ tone = 'dark', className = 'h-6 w-auto' }) {
       viewBox={paths.wordmark.viewBox}
       className={`${light ? 'text-snow' : 'text-fg'} ${className}`}
       role="img"
-      aria-label="FISHTO"
+      aria-label="Fishto"
     >
       <defs>
         <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">

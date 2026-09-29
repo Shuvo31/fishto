@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="t">
-  <title id="t">FISHTO</title>
+  <title id="t">Fishto</title>
   <defs><linearGradient id="fishto-icon" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2997FF"/><stop offset="1" stop-color="#0066CC"/></linearGradient></defs>
   <path fill="url(#fishto-icon)" d="M0 0H1024V1024H0Z"/>
   <path fill="#FFFFFF" fill-rule="evenodd" transform="rotate(-14 512 512)" d="M153.1 512.0C153.1 379.9 232.0 291.8 350.4 291.8C488.5 291.8 597.0 423.9 646.3 481.2L848.8 318.3Q870.9 314.4 857.7 353.1Q778.4 512.0 857.7 670.9Q870.9 709.6 848.8 705.7L646.3 542.8C597.0 600.1 488.5 732.2 350.4 732.2C232.0 732.2 153.1 644.1 153.1 512.0ZM224.2 468.0a37.4 37.4 0 1 0 74.9 0a37.4 37.4 0 1 0 -74.9 0ZM320.8 379.9A158.5 158.5 0 0 1 320.8 644.1A246.6 246.6 0 0 0 320.8 379.9Z"/>
