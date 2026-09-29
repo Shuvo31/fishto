@@ -1,8 +1,6 @@
 import { Check } from 'lucide-react';
 import useReveal from '@/hooks/use-reveal';
 
-const ABOUT_IMAGE = 'https://images.pexels.com/photos/3029526/pexels-photo-3029526.jpeg?auto=compress&cs=tinysrgb';
-
 const promises = [
   'Freshness you can see and taste',
   'Hygienic handling from source to door',
@@ -29,12 +27,10 @@ export default function AboutSection() {
         <div className="mt-16 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="reveal overflow-hidden bg-canvas-alt">
             <img
-              src={`${ABOUT_IMAGE}&w=1000`}
-              srcSet={`${ABOUT_IMAGE}&w=700 700w, ${ABOUT_IMAGE}&w=1000 1000w, ${ABOUT_IMAGE}&w=1400 1400w`}
-              sizes="(min-width: 1024px) 480px, 100vw"
-              alt="Fresh salmon fillets resting on crushed ice"
-              width="1000"
-              height="1250"
+              src="/images/about-packing.webp"
+              alt="Gloved hands packing fresh katla steaks and a whole rohu on ice in an insulated box"
+              width="864"
+              height="1152"
               loading="lazy"
               decoding="async"
               className="aspect-[4/5] w-full object-cover"
@@ -43,8 +39,8 @@ export default function AboutSection() {
 
           <div className="reveal reveal-delay-1">
             <p className="text-base text-fg sm:text-lg">
-              FISHTO started in 2022 with one clear mission: deliver the freshest, highest-quality
-              fish to every doorstep and business counter.
+              FISHTO started in Kolkata in 2022 with one clear mission: deliver the freshest,
+              highest-quality fish to every doorstep and business counter.
             </p>
             <p className="mt-4 text-sm text-fg-muted sm:text-base">
               Whether you're a family ordering for tonight's dinner or a hotel that needs a

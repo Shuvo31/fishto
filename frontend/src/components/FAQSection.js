@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     question: 'Do you deliver to my area?',
-    answer: 'We serve major areas in and around our operating region. To confirm delivery to your location, message us on WhatsApp or give us a call.',
+    answer: 'We deliver across Kolkata and nearby areas. To confirm delivery to your exact location, message us on WhatsApp or give us a call.',
   },
   {
     question: 'How far in advance should I order for events?',

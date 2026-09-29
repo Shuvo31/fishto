@@ -19,7 +19,7 @@ export default function Footer() {
         <div className="border-b border-fg/15 pb-8">
           <Logo className="h-7 w-auto" />
           <p className="mt-3 max-w-[520px] text-fg-muted">
-            FISHTO is a fresh fish supplier for homes, hotels, restaurants, caterers and events.
+            FISHTO is a Kolkata-based fresh fish supplier for homes, hotels, restaurants, caterers and events.
             Hygienically handled, packed on ice and delivered on time since {SITE.foundedYear}.
           </p>
         </div>

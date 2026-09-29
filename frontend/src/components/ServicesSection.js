@@ -5,49 +5,47 @@ import { whatsappLink } from '@/lib/site';
 const services = [
   {
     title: 'Household supply',
-    tagline: 'Fresh fish at your door. Daily, weekly or on demand.',
-    image: 'https://images.unsplash.com/photo-1764345960391-9b66a2541deb?crop=entropy&cs=srgb&fm=jpg&q=80',
-    alt: 'Fresh fish prepared for a family meal',
+    tagline: 'Rohu and katla, cut the way your kitchen likes it. Daily, weekly or on demand.',
+    image: '/images/service-household.webp',
+    alt: 'Fresh rohu fish steaks on a banana leaf in a Kolkata home kitchen',
     tone: 'light',
   },
   {
     title: 'Hotel bulk supply',
-    tagline: 'High-volume, consistent supply for daily menus.',
-    image: 'https://images.unsplash.com/photo-1772654271379-484eeabecc37?crop=entropy&cs=srgb&fm=jpg&q=80',
-    alt: 'Bulk crates of fresh fish ready for hotel kitchens',
+    tagline: 'Crates of rohu and katla on ice, delivered fresh for your daily menus.',
+    image: '/images/service-hotel.webp',
+    alt: 'Crates of fresh rohu and katla on ice at a Kolkata wholesale fish market',
     tone: 'dark',
   },
   {
     title: 'Restaurant supply',
-    tagline: 'Premium-grade local favourites and exotic varieties.',
-    image: 'https://images.pexels.com/photos/3029526/pexels-photo-3029526.jpeg?auto=compress&cs=tinysrgb',
-    alt: 'Premium fish fillets on ice for restaurants',
+    tagline: 'Silver ilish and premium catch for menus that can’t compromise.',
+    image: '/images/service-restaurant.webp',
+    alt: 'Two whole fresh hilsa (ilish) fish on a banana leaf with green chillies',
     tone: 'dark',
   },
   {
     title: 'Catering supply',
-    tagline: 'Large-scale orders, delivered on time for every event.',
-    image: 'https://images.pexels.com/photos/229789/pexels-photo-229789.jpeg?auto=compress&cs=tinysrgb',
-    alt: 'Whole fish on ice for catering orders',
+    tagline: 'Golda chingri by the tray, delivered on time for every event.',
+    image: '/images/service-catering.webp',
+    alt: 'Trays of fresh golda chingri (giant river prawns) on ice in a catering kitchen',
     tone: 'light',
   },
   {
     title: 'Event & occasion supply',
-    tagline: 'Marriages, receptions, birthdays and every celebration.',
-    image: 'https://images.unsplash.com/photo-1769611446060-e97e80d23063?crop=entropy&cs=srgb&fm=jpg&q=80',
-    alt: 'Fish dishes served at a celebration',
+    tagline: 'Shorshe ilish to chingri malai — the fish that makes a Bengali feast.',
+    image: '/images/service-event.webp',
+    alt: 'Bengali wedding thali with shorshe ilish, chingri malai curry and rice on a banana leaf',
     tone: 'light',
   },
   {
     title: 'Custom bulk orders',
-    tagline: 'Your quantity, your varieties. Tailored to the kilo.',
-    image: 'https://images.unsplash.com/photo-1767347898281-e4a21328e615?crop=entropy&cs=srgb&fm=jpg&q=80',
-    alt: 'Assorted fresh fish packed for a custom bulk order',
+    tagline: 'Hilsa, rohu, katla, prawns — your mix, your quantity, to the kilo.',
+    image: '/images/service-custom.webp',
+    alt: 'Assorted fresh hilsa, rohu, katla, golda and bagda prawns on ice',
     tone: 'dark',
   },
 ];
-
-const withWidth = (url, w) => `${url}&w=${w}`;
 
 function ServiceTile({ service }) {
   const dark = service.tone === 'dark';
@@ -78,12 +76,10 @@ function ServiceTile({ service }) {
       </div>
       <div className="tile-media mt-8 aspect-[4/3] flex-grow overflow-hidden">
         <img
-          src={withWidth(service.image, 900)}
-          srcSet={`${withWidth(service.image, 600)} 600w, ${withWidth(service.image, 900)} 900w, ${withWidth(service.image, 1400)} 1400w`}
-          sizes="(min-width: 768px) 50vw, 100vw"
+          src={service.image}
           alt={service.alt}
-          width="900"
-          height="675"
+          width="1152"
+          height="864"
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover"

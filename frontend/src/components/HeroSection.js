@@ -28,7 +28,7 @@ export default function HeroSection() {
         <div className="container-apple relative z-10 pt-14 text-center sm:pt-16">
           <h1 id="hero-title">
             <span className="block animate-fade-up text-sm font-semibold sm:text-lg">
-              <span className="text-gradient-brand">FISHTO fresh fish supply</span>
+              <span className="text-gradient-brand">Kolkata’s fresh fish supply</span>
             </span>
             <span
               className="mt-2 block animate-fade-up font-display text-display font-semibold text-snow sm:text-display-lg lg:text-hero"

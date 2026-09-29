@@ -20,7 +20,7 @@ const contactMethods = [
   { icon: Phone, label: 'Call us', value: SITE.phoneDisplay, href: SITE.phoneHref, testId: 'contact-phone-link' },
   { icon: MessageCircle, label: 'WhatsApp', value: 'Chat with us', href: whatsappLink(), external: true },
   { icon: Mail, label: 'Email', value: SITE.email, href: `mailto:${SITE.email}`, testId: 'contact-email-link' },
-  { icon: MapPin, label: 'Delivery area', value: 'Message us to confirm your location' },
+  { icon: MapPin, label: 'Delivery area', value: 'Kolkata & nearby areas' },
 ];
 
 const fieldClass =
